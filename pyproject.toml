@@ -1,0 +1,22 @@
+[build-system]
+requires = ["setuptools>=69.0.3"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "jciphers"
+version = "0.0.1"
+authors = [
+  { name="Jonathan Ferreira", email="jonferreira@protonmail.ch" },
+]
+description = "A Python library inspired by the work of Simon Singh."
+readme = "README.md"
+requires-python = ">=3.10"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+
+[project.urls]
+Homepage = "https://github.com/johnnytoxin/jciphers"
+Issues = "https://github.com/johnnytoxin/jciphers/issues"
