@@ -4,9 +4,11 @@ __all__ = [
     "decrypt_caesar_shift",
     "decrypt_caesar_shift_with_key",
     "decrypt_mlecchita_vikaalpa_roman",
+    "decrypt_vigenere",
     "encrypt_caesar_shift",
     "encrypt_caesar_shift_with_key",
     "encrypt_mlecchita_vikaalpa_roman",
+    "encrypt_vigenere",
 ]
 
 _mlecchita_vikaalpa_roman_cipher = {
@@ -70,6 +72,24 @@ def decrypt_mlecchita_vikaalpa_roman(encrypted_message: str) -> str:
     return decrypted_message
 
 
+def decrypt_vigenere(message: str, key: str) -> str:
+    message = message.replace(" ", "")
+    key = key.replace(" ", "").upper()
+    key_index = 0
+    encrypted_message = ""
+    for char in message:
+        ordinal = ord(char.upper())
+        key_ordinal = ord(key[key_index]) + 1 - 65
+        if ordinal - key_ordinal < 65:
+            ordinal += 26
+        print(ordinal)
+        encrypted_message += chr(ordinal - key_ordinal)
+        key_index += 1
+        if key_index == len(key):
+            key_index = 0
+    return encrypted_message
+
+
 def encrypt_caesar_shift(message: str, places: int) -> str:
     if places < 1 or places > 25:
         raise IndexError(
@@ -100,6 +120,23 @@ def encrypt_mlecchita_vikaalpa_roman(message: str) -> str:
     encrypted_message = ""
     for char in message:
         encrypted_message += _mlecchita_vikaalpa_roman_cipher[char.upper()]
+    return encrypted_message
+
+
+def encrypt_vigenere(message: str, key: str) -> str:
+    message = message.replace(" ", "")
+    key = key.replace(" ", "").upper()
+    key_index = 0
+    encrypted_message = ""
+    for char in message:
+        ordinal = ord(char.upper())
+        key_ordinal = ord(key[key_index]) + 1 - 65
+        if ordinal + key_ordinal > 90:
+            ordinal -= 26
+        encrypted_message += chr(ordinal + key_ordinal)
+        key_index += 1
+        if key_index == len(key):
+            key_index = 0
     return encrypted_message
 
 
