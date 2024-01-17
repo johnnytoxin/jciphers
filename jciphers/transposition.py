@@ -5,13 +5,14 @@ __all__ = ["decrypt_rail_fence", "encrypt_rail_fence"]
 
 def decrypt_rail_fence(encrypted_message: str, levels: int) -> str:
     """Decrypts a message encoded with a rail fence transposition."""
+    encrypted_message = encrypted_message.replace(" ", "")
     array = [0] * len(encrypted_message)
     index = 0
     index_offset = 0
     for char in encrypted_message:
         array[index + index_offset] = char
         index += levels
-        if index + index_offset > len(encrypted_message):
+        if index + index_offset >= len(encrypted_message):
             index = 0
             index_offset += 1
     return "".join(array)
